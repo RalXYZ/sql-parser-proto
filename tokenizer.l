@@ -1,4 +1,5 @@
 %{
+#include <iostream>
 #include "parser_pub.h"
 #include "parser.tab.hh"
 %}
@@ -20,3 +21,16 @@ temperature    return TOKTEMPERATURE;
 [ \t]+         /* ignore whitespace */
 
 %%
+
+int parse(char *input) {
+    YY_BUFFER_STATE bp = yy_scan_string(input);
+    if (bp == nullptr) {
+    		std::cout << "error on creating YY_BUFFER_STATE" << std::endl;
+    		return -1;
+    }
+    yy_switch_to_buffer(bp);
+    yyparse();
+    yy_delete_buffer(bp);
+    yylex_destroy();
+    return 0;
+}

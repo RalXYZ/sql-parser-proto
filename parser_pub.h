@@ -7,6 +7,8 @@ int yylex();
 
 int yyparse();
 
+int parse(char *input);
+
 int yyerror(const char *s);
 
 #endif //SQL_PARSER_PROTO_PARSER_PUB_H
